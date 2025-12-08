@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - FinanceFlow</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-black min-h-screen lg:overflow-hidden">
+    <!-- Desktop Layout: Split Screen -->
+    <div class="hidden lg:flex h-screen">
+      <!-- Left Banner Section (Desktop) -->
+      <div
+        class="w-2/5 bg-gradient-to-br from-teal-900 via-teal-800 to-blue-900 relative overflow-hidden flex-shrink-0"
+      >
+        <!-- Decorative background pattern -->
+        <div class="absolute inset-0 opacity-20">
+          <svg
+            class="w-full h-full"
+            viewBox="0 0 400 600"
+            preserveAspectRatio="none"
+          >
+            <polyline
+              points="0,200 100,150 200,180 300,120 400,160"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              class="text-teal-300"
+            />
+            <polyline
+              points="0,300 100,250 200,280 300,220 400,260"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              class="text-teal-300"
+            />
+            <circle
+              cx="150"
+              cy="200"
+              r="3"
+              fill="currentColor"
+              class="text-teal-300"
+            />
+            <circle
+              cx="250"
+              cy="180"
+              r="3"
+              fill="currentColor"
+              class="text-teal-300"
+            />
+            <circle
+              cx="350"
+              cy="220"
+              r="3"
+              fill="currentColor"
+              class="text-teal-300"
+            />
+          </svg>
+        </div>
+
+        <div class="relative z-10 flex flex-col justify-between h-full p-12">
+          <!-- Logo -->
+          <div class="flex items-center space-x-3 mb-8">
+            <div
+              class="w-10 h-10 bg-white rounded-lg flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-teal-900"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                />
+              </svg>
+            </div>
+            <span class="text-white text-2xl font-bold">FinanceFlow</span>
+          </div>
+
+          <!-- Content -->
+          <div class="flex-1 flex flex-col justify-center text-center">
+            <h1 class="text-white text-4xl font-bold mb-4">
+              Empower Your Financial Journey
+            </h1>
+            <p class="text-white text-lg opacity-90 max-w-md mx-auto">
+              Seamlessly manage, track, and optimize your expenses with
+              FinanceFlow, your trusted financial companion.
+            </p>
+          </div>
+
+          <!-- Footer -->
+          <div
+            class="text-white text-sm opacity-70 flex items-center space-x-1"
+          >
+            <span>Made with</span>
+            <span class="text-purple-400 font-bold">V</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Form Section (Desktop) -->
+      <div class="w-3/5 bg-gray-900 overflow-y-auto">
+        <div class="min-h-full flex items-center justify-center p-12">
+          <div class="w-full max-w-md">
+            <h2 class="text-white text-3xl font-bold mb-2">
+              Create Your Account
+            </h2>
+            <p class="text-gray-400 mb-8">
+              Start tracking your finances with ease.
+            </p>
+
+            <form id="signupForm" class="space-y-5">
+              <!-- Full Name -->
+              <div>
+                <label
+                  for="fullname"
+                  class="block text-white text-sm font-medium mb-2"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  id="fullname"
+                  name="fullname"
+                  placeholder="Aarav Sharma"
+                  required
+                  class="input-box"
+                />
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label
+                  for="email"
+                  class="block text-white text-sm font-medium mb-2"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="aarav.sharma@example.com"
+                  required
+                  class="input-box"
+                />
+              </div>
+
+              <!-- Phone Number -->
+              <div>
+                <label
+                  for="phone"
+                  class="block text-white text-sm font-medium mb-2"
+                  >Phone Number (Optional)</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="+91 9876543210"
+                  class="input-box"
+                />
+              </div>
+
+              <!-- User ID -->
+              <div>
+                <label
+                  for="userid"
+                  class="block text-white text-sm font-medium mb-2"
+                  >User ID</label
+                >
+                <input
+                  type="text"
+                  id="userid"
+                  name="userid"
+                  placeholder="aaravsharma"
+                  required
+                  class="input-box"
+                />
+              </div>
+
+              <!-- Password -->
+              <div>
+                <label
+                  for="password"
+                  class="block text-white text-sm font-medium mb-2"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password@123"
+                  required
+                  class="input-box"
+                />
+              </div>
+
+              <!-- Confirm Password -->
+              <div>
+                <label
+                  for="confirmPassword"
+                  class="block text-white text-sm font-medium mb-2"
+                  >Confirm Password</label
+                >
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Password@123"
+                  required
+                  class="input-box"
+                />
+              </div>
+
+              <!-- Preferred Currency -->
+              <div>
+                <label
+                  for="currency"
+                  class="block text-white text-sm font-medium mb-2"
+                  >Preferred Currency</label
+                >
+                <select
+                  id="currency"
+                  name="currency"
+                  required
+                  class="input-box"
+                >
+                  <option value="INR">INR - Indian Rupee</option>
+                  <option value="USD">USD - US Dollar</option>
+                  <option value="EUR">EUR - Euro</option>
+                  <option value="GBP">GBP - British Pound</option>
+                  <option value="JPY">JPY - Japanese Yen</option>
+                  <option value="AUD">AUD - Australian Dollar</option>
+                  <option value="CAD">CAD - Canadian Dollar</option>
+                  <option value="CHF">CHF - Swiss Franc</option>
+                  <option value="CNY">CNY - Chinese Yuan</option>
+                  <option value="SGD">SGD - Singapore Dollar</option>
+                </select>
+              </div>
+
+              <!-- Inline form error (desktop) -->
+              <div id="signupError" class="text-red-400 text-sm mb-2" style="display:none"></div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+              >
+                Sign Up
+              </button>
+            </form>
+
+            <!-- Login Link -->
+            <p class="text-center text-gray-400 mt-6">
+              Already have an account?
+              <a
+                href="login.html"
+                class="text-blue-500 hover:text-blue-600 font-medium"
+                >Login</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Layout: Full Screen -->
+    <div class="lg:hidden min-h-screen bg-black flex flex-col px-6 py-8">
+      <!-- App Icon and Header -->
+      <div class="text-center mb-8">
+        <div
+          class="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4"
+        >
+          <svg
+            class="w-12 h-12 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+        </div>
+        <h1 class="text-white text-3xl font-bold mb-2">Create an Account</h1>
+        <p class="text-gray-400 text-sm">
+          Set up your profile to start tracking your finances
+        </p>
+      </div>
+
+      <!-- Form -->
+      <form id="signupFormMobile" class="flex-1 space-y-4">
+        <!-- Full Name -->
+        <div>
+          <label
+            for="fullnameMobile"
+            class="block text-white text-sm font-medium mb-2"
+            >Full Name</label
+          >
+          <div class="relative">
+            <i
+              class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            ></i>
+            <input
+              type="text"
+              id="fullnameMobile"
+              name="fullname"
+              placeholder="Aarav Sharma"
+              required
+              class="input-box pl-10"
+            />
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label
+            for="emailMobile"
+            class="block text-white text-sm font-medium mb-2"
+            >Email</label
+          >
+          <div class="relative">
+            <i
+              class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            ></i>
+            <input
+              type="email"
+              id="emailMobile"
+              name="email"
+              placeholder="aarav.sharma@example.com"
+              required
+              class="input-box pl-10"
+            />
+          </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div>
+          <label
+            for="phoneMobile"
+            class="block text-white text-sm font-medium mb-2"
+            >Phone Number (Optional)</label
+          >
+          <div class="relative">
+            <i
+              class="fas fa-phone absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            ></i>
+            <input
+              type="tel"
+              id="phoneMobile"
+              name="phone"
+              placeholder="+91 98765 43210"
+              class="input-box pl-10"
+            />
+          </div>
+        </div>
+
+        <!-- User ID -->
+        <div>
+          <label
+            for="useridMobile"
+            class="block text-white text-sm font-medium mb-2"
+            >User ID</label
+          >
+          <div class="relative">
+            <i
+              class="fas fa-at absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            ></i>
+            <input
+              type="text"
+              id="useridMobile"
+              name="userid"
+              placeholder="aaravsharma"
+              required
+              class="input-box pl-10"
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label
+            for="passwordMobile"
+            class="block text-white text-sm font-medium mb-2"
+            >Password</label
+          >
+          <div class="relative">
+            <i
+              class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            ></i>
+            <input
+              type="password"
+              id="passwordMobile"
+              name="password"
+              placeholder="Password@123"
+              required
+              class="input-box pl-10"
+            />
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+          <label
+            for="confirmPasswordMobile"
+            class="block text-white text-sm font-medium mb-2"
+            >Confirm Password</label
+          >
+          <div class="relative">
+            <i
+              class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            ></i>
+            <input
+              type="password"
+              id="confirmPasswordMobile"
+              name="confirmPassword"
+              placeholder="Password@123"
+              required
+              class="input-box pl-10"
+            />
+          </div>
+        </div>
+
+        <!-- Preferred Currency -->
+        <div>
+          <label
+            for="currencyMobile"
+            class="block text-white text-sm font-medium mb-2"
+            >Preferred Currency</label
+          >
+          <div class="relative">
+            <i
+              class="fas fa-dollar-sign absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
+            ></i>
+
+            <!-- Inline form error (mobile) -->
+            <div id="signupError" class="text-red-400 text-sm mb-2" style="display:none"></div>
+
+            <!-- Submit Button -->
+              name="currency"
+              required
+              class="input-box pl-10"
+            >
+              <option value="INR">INR - Indian Rupee</option>
+              <option value="USD">USD - US Dollar</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="GBP">GBP - British Pound</option>
+              <option value="JPY">JPY - Japanese Yen</option>
+              <option value="AUD">AUD - Australian Dollar</option>
+              <option value="CAD">CAD - Canadian Dollar</option>
+              <option value="CHF">CHF - Swiss Franc</option>
+              <option value="CNY">CNY - Chinese Yuan</option>
+              <option value="SGD">SGD - Singapore Dollar</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 mt-6"
+        >
+          Sign Up
+        </button>
+      </form>
+
+      <!-- Login Link -->
+      <p class="text-center text-gray-400 mt-6 text-sm">
+        Already have an account?
+        <a
+          href="login.html"
+          class="text-blue-500 hover:text-blue-600 font-medium"
+          >Login</a
+        >
+      </p>
+
+      <!-- Footer -->
+      <div
+        class="text-white text-xs opacity-70 flex items-center justify-center space-x-1 mt-8"
+      >
+        <span>Made with</span>
+        <span class="text-purple-400 font-bold">A</span>
+      </div>
+    </div>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/auth.js"></script>
+    <script>
+      // Handle form submission for both desktop and mobile
+      document
+        .getElementById("signupForm")
+        ?.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const formData = {
+            fullname: document.getElementById("fullname").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            userid: document.getElementById("userid").value,
+            password: document.getElementById("password").value,
+            confirmPassword: document.getElementById("confirmPassword").value,
+            currency: document.getElementById("currency").value,
+          };
+          signup(formData);
+        });
+
+      document
+        .getElementById("signupFormMobile")
+        ?.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const formData = {
+            fullname: document.getElementById("fullnameMobile").value,
+            email: document.getElementById("emailMobile").value,
+            phone: document.getElementById("phoneMobile").value,
+            userid: document.getElementById("useridMobile").value,
+            password: document.getElementById("passwordMobile").value,
+            confirmPassword: document.getElementById("confirmPasswordMobile")
+              .value,
+            currency: document.getElementById("currencyMobile").value,
+          };
+          signup(formData);
+        });
+    </script>
+  </body>
+</html>

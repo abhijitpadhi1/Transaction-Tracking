@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - FinanceFlow</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="assets/js/api.js"></script>
+    <script>
+      ensureAuthenticated();
+    </script>
+  </head>
+  <body class="bg-black min-h-screen">
+    <!-- Desktop Layout -->
+    <div class="hidden lg:flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-gray-900 flex flex-col border-r border-gray-800">
+        <!-- Logo -->
+        <div class="p-6 border-b border-gray-800">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                />
+              </svg>
+            </div>
+            <span class="text-white text-xl font-bold">Daily Tracker</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 p-4 space-y-2">
+          <a
+            href="dashboard.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-home w-5"></i>
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="history.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-list w-5"></i>
+            <span>Transactions</span>
+          </a>
+          <a
+            href="statistics.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-chart-bar w-5"></i>
+            <span>Statistics</span>
+          </a>
+          <a
+            href="settings.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-blue-600 text-white"
+          >
+            <i class="fas fa-cog w-5"></i>
+            <span>Settings</span>
+          </a>
+        </nav>
+
+        <!-- Settings Sub-menu -->
+        <div class="p-4 border-t border-gray-800">
+          <h3 class="text-white text-xs font-semibold uppercase mb-2">
+            SETTINGS MENU
+          </h3>
+          <nav class="space-y-1">
+            <a
+              href="#general"
+              class="settings-tab flex items-center space-x-3 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm"
+              data-tab="general"
+            >
+              <i class="fas fa-cog w-4"></i>
+              <span>General</span>
+            </a>
+            <a
+              href="#categories"
+              class="settings-tab flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white text-sm transition-colors"
+              data-tab="categories"
+            >
+              <i class="fas fa-th w-4"></i>
+              <span>Categories</span>
+            </a>
+            <a
+              href="#data"
+              class="settings-tab flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white text-sm transition-colors"
+              data-tab="data"
+            >
+              <i class="fas fa-database w-4"></i>
+              <span>Data & Privacy</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Footer -->
+        <div class="p-4 border-t border-gray-800">
+          <div
+            class="text-white text-xs opacity-70 flex items-center space-x-1"
+          >
+            <span>Made with</span>
+            <span class="text-purple-400 font-bold">A</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-y-auto bg-black">
+        <div class="p-8">
+          <!-- General Settings Tab -->
+          <div id="generalTab" class="settings-content">
+            <div
+              class="bg-gray-900 rounded-lg border border-gray-800 p-8 max-w-2xl"
+            >
+              <h2 class="text-white text-2xl font-bold mb-6">
+                General Settings
+              </h2>
+
+              <!-- Dark Mode Toggle -->
+              <div
+                class="flex items-center justify-between py-4 border-b border-gray-800"
+              >
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-moon text-gray-400"></i>
+                  <span class="text-white font-medium">Dark Mode</span>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    id="darkModeToggle"
+                    class="sr-only peer"
+                    checked
+                  />
+                  <div
+                    class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                  ></div>
+                </label>
+              </div>
+
+              <!-- Default Currency -->
+              <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-dollar-sign text-gray-400"></i>
+                  <span class="text-white font-medium">Default Currency</span>
+                </div>
+                <select
+                  id="defaultCurrency"
+                  class="bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded-lg"
+                >
+                  <option value="INR">INR - Indian Rupee</option>
+                  <option value="USD">USD - US Dollar</option>
+                  <option value="EUR">EUR - Euro</option>
+                  <option value="GBP">GBP - British Pound</option>
+                  <option value="JPY">JPY - Japanese Yen</option>
+                  <option value="AUD">AUD - Australian Dollar</option>
+                  <option value="CAD">CAD - Canadian Dollar</option>
+                  <option value="CHF">CHF - Swiss Franc</option>
+                  <option value="CNY">CNY - Chinese Yuan</option>
+                  <option value="SGD">SGD - Singapore Dollar</option>
+                </select>
+              </div>
+
+              <!-- Monthly Budget -->
+              <div
+                class="flex items-center justify-between py-4 border-t border-gray-800"
+              >
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-wallet text-gray-400"></i>
+                  <span class="text-white font-medium">Monthly Budget</span>
+                </div>
+                <input
+                  type="number"
+                  id="budget"
+                  min="0"
+                  placeholder="2000"
+                  class="bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded-lg w-40 text-right"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories Tab -->
+          <div id="categoriesTab" class="settings-content hidden">
+            <div
+              class="bg-gray-900 rounded-lg border border-gray-800 p-8 max-w-2xl"
+            >
+              <h2 class="text-white text-2xl font-bold mb-6">Categories</h2>
+
+              <!-- Category List -->
+              <div id="categoryList" class="space-y-3 mb-6">
+                <!-- Categories will be loaded dynamically -->
+                <div class="text-gray-400 text-center py-8">
+                  Loading categories...
+                </div>
+              </div>
+
+              <!-- Add New Category -->
+              <div class="border-t border-gray-800 pt-6">
+                <h3 class="text-white font-medium mb-4">Add New Category</h3>
+                <form id="addCategoryForm" class="space-y-4">
+                  <div class="grid grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-white text-sm font-medium mb-2"
+                        >Category Name</label
+                      >
+                      <input
+                        type="text"
+                        id="categoryName"
+                        required
+                        class="input-box bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700"
+                        placeholder="Enter category name"
+                      />
+                    </div>
+                    <div>
+                      <label class="block text-white text-sm font-medium mb-2"
+                        >Type</label
+                      >
+                      <select
+                        id="categoryType"
+                        required
+                        class="input-box bg-gray-800 text-white rounded-lg border border-gray-700"
+                      >
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-white text-sm font-medium mb-2"
+                      >Icon (Font Awesome class, e.g., fa-utensils)</label
+                    >
+                    <input
+                      type="text"
+                      id="categoryIcon"
+                      class="input-box bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700"
+                      placeholder="fa-utensils (optional)"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                  >
+                    Add Category
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data & Privacy Tab -->
+          <div id="dataTab" class="settings-content hidden">
+            <div
+              class="bg-gray-900 rounded-lg border border-gray-800 p-8 max-w-2xl"
+            >
+              <h2 class="text-white text-2xl font-bold mb-6">Data & Privacy</h2>
+
+              <!-- Export Data -->
+              <div class="mb-6">
+                <h3 class="text-white font-medium mb-2">Export Your Data</h3>
+                <p class="text-gray-400 text-sm mb-4">
+                  Download all your transactions and categories as a CSV file.
+                </p>
+                <button
+                  id="exportDataBtn"
+                  class="bg-gray-800 hover:bg-gray-700 text-blue-500 font-semibold py-2 px-6 rounded-lg transition-colors border border-gray-700"
+                >
+                  <i class="fas fa-download mr-2"></i>Export Data (CSV)
+                </button>
+              </div>
+
+              <!-- Clear All Data -->
+              <div class="border-t border-gray-800 pt-6">
+                <h3 class="text-white font-medium mb-2">Clear All Data</h3>
+                <p class="text-gray-400 text-sm mb-4">
+                  Permanently delete all your transactions and categories. This
+                  action cannot be undone.
+                </p>
+                <button
+                  id="clearDataBtn"
+                  class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                >
+                  <i class="fas fa-trash mr-2"></i>Clear All Data
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile Layout -->
+    <div class="lg:hidden min-h-screen bg-black pb-20">
+      <!-- Header -->
+      <div class="bg-gray-900 border-b border-gray-800 px-4 py-3">
+        <h1 class="text-white text-lg font-semibold">Settings</h1>
+      </div>
+
+      <!-- Appearance Section -->
+      <div class="px-4 py-4">
+        <div class="bg-gray-900 rounded-lg border border-gray-800 p-4 mb-4">
+          <h3 class="text-white font-medium mb-4">Appearance</h3>
+          <div>
+            <label class="block text-white text-sm mb-2">App Theme</label>
+            <p class="text-gray-400 text-xs mb-3">Current: Dark</p>
+            <div class="flex space-x-2">
+              <button
+                type="button"
+                class="flex-1 py-2 px-4 rounded-lg bg-gray-800 text-gray-400 text-sm font-medium"
+              >
+                Light
+              </button>
+              <button
+                type="button"
+                class="flex-1 py-2 px-4 rounded-lg bg-blue-600 text-white text-sm font-medium"
+              >
+                Dark
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Section -->
+      <div class="px-4 py-2">
+        <div class="bg-gray-900 rounded-lg border border-gray-800 p-4 mb-4">
+          <h3 class="text-white font-medium mb-4">Financial</h3>
+          <div>
+            <label class="block text-white text-sm mb-2"
+              >Default Currency</label
+            >
+            <select
+              id="defaultCurrencyMobile"
+              class="input-box bg-gray-800 text-white rounded-lg border border-gray-700 w-full"
+            >
+              <option value="INR">INR - Indian Rupee</option>
+              <option value="USD">USD - US Dollar</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="GBP">GBP - British Pound</option>
+              <option value="JPY">JPY - Japanese Yen</option>
+              <option value="AUD">AUD - Australian Dollar</option>
+              <option value="CAD">CAD - Canadian Dollar</option>
+              <option value="CHF">CHF - Swiss Franc</option>
+              <option value="CNY">CNY - Chinese Yuan</option>
+              <option value="SGD">SGD - Singapore Dollar</option>
+            </select>
+          </div>
+          <!-- Monthly Budget (mobile) -->
+          <div class="mt-4">
+            <label class="block text-white text-sm mb-2">Monthly Budget</label>
+            <input
+              type="number"
+              id="budgetMobile"
+              min="0"
+              placeholder="2000"
+              class="input-box bg-gray-800 text-white rounded-lg border border-gray-700 w-full text-right"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Section -->
+      <div class="px-4 py-2">
+        <div class="bg-gray-900 rounded-lg border border-gray-800 p-4 mb-4">
+          <h3 class="text-white font-medium mb-4">Categories</h3>
+          <div id="categoryListMobile" class="space-y-3 mb-4">
+            <!-- Categories will be loaded dynamically -->
+            <div class="text-gray-400 text-center py-4">
+              Loading categories...
+            </div>
+          </div>
+          <button
+            id="addCategoryBtnMobile"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2"
+          >
+            <i class="fas fa-plus"></i>
+            <span>Add New Category</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Data Management Section -->
+      <div class="px-4 py-2">
+        <div class="bg-gray-900 rounded-lg border border-gray-800 p-4 mb-4">
+          <h3 class="text-white font-medium mb-4">Data Management</h3>
+          <div class="space-y-3">
+            <button
+              id="exportDataBtnMobile"
+              class="w-full bg-gray-800 hover:bg-gray-700 text-blue-500 font-semibold py-3 px-4 rounded-lg transition-colors border border-gray-700 flex items-center justify-center space-x-2"
+            >
+              <i class="fas fa-download"></i>
+              <span>Export Data (CSV)</span>
+            </button>
+            <button
+              id="clearDataBtnMobile"
+              class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2"
+            >
+              <i class="fas fa-trash"></i>
+              <span>Clear All Data</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav
+        class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 flex justify-around items-center py-2"
+      >
+        <a
+          href="dashboard.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-home text-gray-400 text-lg"></i>
+          <span class="text-gray-400 text-xs">Home</span>
+        </a>
+        <a
+          href="history.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-clock text-gray-400 text-lg"></i>
+          <span class="text-gray-400 text-xs">Trans</span>
+        </a>
+        <a
+          href="statistics.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-chart-bar text-gray-400 text-lg"></i>
+          <span class="text-gray-400 text-xs">Stats</span>
+        </a>
+        <a
+          href="settings.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-cog text-blue-500 text-lg"></i>
+          <span class="text-blue-500 text-xs">Settings</span>
+        </a>
+      </nav>
+
+      <!-- Footer -->
+      <div class="px-4 pb-24 pt-4">
+        <div
+          class="text-white text-xs opacity-70 flex items-center justify-center space-x-1"
+        >
+          <span>Made with</span>
+          <span class="text-purple-400 font-bold">A</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Category Modal (Mobile) -->
+    <div
+      id="addCategoryModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-gray-900 rounded-lg border border-gray-800 p-6 w-full max-w-md"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-white text-lg font-semibold">Add New Category</h3>
+          <button id="closeModalBtn" class="text-gray-400 hover:text-white">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <form id="addCategoryFormMobile" class="space-y-4">
+          <div>
+            <label class="block text-white text-sm font-medium mb-2"
+              >Category Name</label
+            >
+            <input
+              type="text"
+              id="categoryNameMobile"
+              required
+              class="input-box bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700 w-full"
+              placeholder="Enter category name"
+            />
+          </div>
+          <div>
+            <label class="block text-white text-sm font-medium mb-2"
+              >Type</label
+            >
+            <select
+              id="categoryTypeMobile"
+              required
+              class="input-box bg-gray-800 text-white rounded-lg border border-gray-700 w-full"
+            >
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-white text-sm font-medium mb-2"
+              >Icon (optional)</label
+            >
+            <input
+              type="text"
+              id="categoryIconMobile"
+              class="input-box bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700 w-full"
+              placeholder="fa-utensils"
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+          >
+            Add Category
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="assets/js/settings.js"></script>
+  </body>
+</html>

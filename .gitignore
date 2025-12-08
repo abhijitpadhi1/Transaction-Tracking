@@ -1,0 +1,10 @@
+.venv/
+backend/*.db
+__pycache__/
+*.pyc
+.env
+.env.local
+.cursor
+.vscode
+.DS_Store
+.cursor/rules.md

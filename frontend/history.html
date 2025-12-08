@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transaction History - FinanceFlow</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="assets/js/api.js"></script>
+    <script>
+      ensureAuthenticated();
+    </script>
+  </head>
+  <body class="bg-black min-h-screen">
+    <!-- Desktop Layout -->
+    <div class="hidden lg:flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-gray-900 flex flex-col border-r border-gray-800">
+        <!-- Logo -->
+        <div class="p-6 border-b border-gray-800">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <span class="text-white text-xl font-bold">Daily Tracker</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 p-4 space-y-2">
+          <a
+            href="dashboard.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-home w-5"></i>
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="history.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-blue-600 text-white"
+          >
+            <i class="fas fa-list w-5"></i>
+            <span>Transactions</span>
+          </a>
+          <a
+            href="statistics.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-chart-bar w-5"></i>
+            <span>Statistics</span>
+          </a>
+          <a
+            href="settings.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-cog w-5"></i>
+            <span>Settings</span>
+          </a>
+        </nav>
+
+        <!-- Footer -->
+        <div class="p-4 border-t border-gray-800">
+          <div
+            class="text-white text-xs opacity-70 flex items-center space-x-1"
+          >
+            <span>Made with</span>
+            <span class="text-purple-400 font-bold">A</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-hidden bg-black flex">
+        <!-- Left Filter Panel -->
+        <div
+          class="w-80 bg-gray-900 border-r border-gray-800 overflow-y-auto p-6 space-y-6"
+        >
+          <h2 class="text-white text-xl font-bold">Transaction History</h2>
+
+          <!-- Search Transactions -->
+          <div>
+            <h3 class="text-white text-sm font-medium mb-3">
+              Search Transactions
+            </h3>
+            <div class="relative">
+              <i
+                class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              ></i>
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search notes or categories..."
+                class="input-box pl-10 bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700"
+              />
+            </div>
+          </div>
+
+          <!-- Filter by Date -->
+          <div>
+            <h3 class="text-white text-sm font-medium mb-3">Filter by Date</h3>
+            <div class="space-y-2 mb-4">
+              <button
+                type="button"
+                class="date-filter-btn w-full py-2 px-4 rounded-lg bg-gray-800 text-white text-sm hover:bg-gray-700 transition-colors"
+                data-filter="today"
+              >
+                Today
+              </button>
+              <button
+                type="button"
+                class="date-filter-btn w-full py-2 px-4 rounded-lg bg-gray-800 text-white text-sm hover:bg-gray-700 transition-colors"
+                data-filter="weekly"
+              >
+                Last 7 Days
+              </button>
+              <button
+                type="button"
+                class="date-filter-btn w-full py-2 px-4 rounded-lg bg-blue-600 text-white text-sm hover:bg-blue-700 transition-colors"
+                data-filter="monthly"
+              >
+                Last 30 Days
+              </button>
+            </div>
+            <!-- Calendar Widget -->
+            <div class="bg-gray-800 rounded-lg p-4">
+              <div class="flex items-center justify-between mb-4">
+                <button
+                  type="button"
+                  id="prevMonth"
+                  class="text-gray-400 hover:text-white"
+                >
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <h4 class="text-white font-medium" id="calendarMonth">
+                  December 2025
+                </h4>
+                <button
+                  type="button"
+                  id="nextMonth"
+                  class="text-gray-400 hover:text-white"
+                >
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+              <div id="calendarGrid" class="grid grid-cols-7 gap-1 text-center">
+                <!-- Calendar will be generated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Transaction Type -->
+          <div>
+            <h3 class="text-white text-sm font-medium mb-3">
+              Transaction Type
+            </h3>
+            <div class="flex space-x-2 bg-gray-800 p-1 rounded-lg">
+              <button
+                type="button"
+                class="type-filter-btn flex-1 py-2 px-4 rounded-lg text-white text-sm font-medium transition-colors bg-blue-600"
+                data-type="all"
+              >
+                All
+              </button>
+              <button
+                type="button"
+                class="type-filter-btn flex-1 py-2 px-4 rounded-lg text-white text-sm font-medium transition-colors"
+                data-type="income"
+              >
+                Income
+              </button>
+              <button
+                type="button"
+                class="type-filter-btn flex-1 py-2 px-4 rounded-lg text-white text-sm font-medium transition-colors"
+                data-type="expense"
+              >
+                Expense
+              </button>
+            </div>
+          </div>
+
+          <!-- Category Filter -->
+          <div>
+            <h3 class="text-white text-sm font-medium mb-3">Category</h3>
+            <select
+              id="categoryFilter"
+              class="input-box bg-gray-800 text-white rounded-lg border border-gray-700"
+            >
+              <option value="all">All Categories</option>
+              <!-- Categories will be loaded dynamically -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Right Transaction List -->
+        <div class="flex-1 overflow-y-auto bg-black p-6">
+          <div
+            class="bg-gray-900 rounded-lg border border-gray-800 overflow-hidden"
+          >
+            <div class="p-6 border-b border-gray-800">
+              <h3 class="text-white font-medium">All Transactions</h3>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-800">
+                  <tr>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    >
+                      CATEGORY
+                    </th>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    >
+                      NOTE
+                    </th>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    >
+                      DATE
+                    </th>
+                    <th
+                      class="px-6 py-3 text-right text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    >
+                      AMOUNT
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="transactionsTable" class="divide-y divide-gray-800">
+                  <tr>
+                    <td colspan="4" class="px-6 py-8 text-center text-gray-400">
+                      Loading transactions...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile Layout -->
+    <div class="lg:hidden min-h-screen bg-black pb-20">
+      <!-- Header -->
+      <div class="bg-gray-900 border-b border-gray-800 px-4 py-3">
+        <h1 class="text-white text-lg font-semibold text-center">
+          Transaction History
+        </h1>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="p-4">
+        <div class="relative">
+          <i
+            class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          ></i>
+          <input
+            type="text"
+            id="searchInputMobile"
+            placeholder="Search transactions..."
+            class="input-box pl-10 bg-gray-900 text-white placeholder-gray-400 rounded-lg border border-gray-800 w-full"
+          />
+        </div>
+      </div>
+
+      <!-- Date Filters -->
+      <div class="px-4 mb-4">
+        <div class="flex space-x-2">
+          <button
+            type="button"
+            class="date-filter-btn-mobile flex-1 py-2 px-4 rounded-lg bg-blue-600 text-white text-sm font-medium transition-colors"
+            data-filter="daily"
+          >
+            Daily
+          </button>
+          <button
+            type="button"
+            class="date-filter-btn-mobile flex-1 py-2 px-4 rounded-lg bg-gray-900 text-gray-400 text-sm font-medium transition-colors"
+            data-filter="weekly"
+          >
+            Weekly
+          </button>
+          <button
+            type="button"
+            class="date-filter-btn-mobile flex-1 py-2 px-4 rounded-lg bg-gray-900 text-gray-400 text-sm font-medium transition-colors"
+            data-filter="monthly"
+          >
+            Monthly
+          </button>
+        </div>
+      </div>
+
+      <!-- Transaction Groups -->
+      <div id="transactionsMobile" class="px-4 space-y-6 pb-4">
+        <div class="text-gray-400 text-center py-8">
+          Loading transactions...
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav
+        class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 flex justify-around items-center py-2"
+      >
+        <a
+          href="dashboard.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-home text-gray-400 text-lg"></i>
+          <span class="text-gray-400 text-xs">Home</span>
+        </a>
+        <a
+          href="history.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-clock text-blue-500 text-lg"></i>
+          <span class="text-blue-500 text-xs">Trans</span>
+        </a>
+        <a
+          href="statistics.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-chart-bar text-gray-400 text-lg"></i>
+          <span class="text-gray-400 text-xs">Stats</span>
+        </a>
+        <a
+          href="settings.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-cog text-gray-400 text-lg"></i>
+          <span class="text-gray-400 text-xs">Settings</span>
+        </a>
+      </nav>
+
+      <!-- Footer -->
+      <div class="px-4 pb-24 pt-4">
+        <div
+          class="text-white text-xs opacity-70 flex items-center justify-center space-x-1"
+        >
+          <span>Made with</span>
+          <span class="text-purple-400 font-bold">A</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/history.js"></script>
+  </body>
+</html>

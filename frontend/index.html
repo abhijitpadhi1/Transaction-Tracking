@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinanceFlow - Track Your Finances</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-black min-h-screen overflow-hidden">
+    <!-- Desktop Layout -->
+    <div class="hidden lg:flex h-screen items-center justify-center">
+      <div class="w-full max-w-6xl mx-auto px-12">
+        <div class="grid grid-cols-2 gap-12 items-center">
+          <!-- Left Side: Branding & Content -->
+          <div class="space-y-8">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3 mb-8">
+              <div
+                class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg"
+              >
+                <svg
+                  class="w-10 h-10 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                  />
+                </svg>
+              </div>
+              <span class="text-white text-4xl font-bold">FinanceFlow</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-white text-5xl font-bold leading-tight">
+              Empower Your
+              <span class="text-blue-500">Financial Journey</span>
+            </h1>
+
+            <!-- Description -->
+            <p class="text-gray-400 text-xl leading-relaxed max-w-lg">
+              Seamlessly manage, track, and optimize your expenses with
+              FinanceFlow, your trusted financial companion. Take control of
+              your money with powerful analytics and insights.
+            </p>
+
+            <!-- Features List -->
+            <div class="space-y-4">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-check-circle text-blue-500 text-xl"></i>
+                <span class="text-gray-300 text-lg"
+                  >Track income and expenses effortlessly</span
+                >
+              </div>
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-check-circle text-blue-500 text-xl"></i>
+                <span class="text-gray-300 text-lg"
+                  >Visual analytics and spending insights</span
+                >
+              </div>
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-check-circle text-blue-500 text-xl"></i>
+                <span class="text-gray-300 text-lg"
+                  >Categorize transactions for better budgeting</span
+                >
+              </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex space-x-4 pt-4">
+              <a
+                href="signup.html"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center space-x-2 shadow-lg"
+              >
+                <span>Get Started</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              <a
+                href="login.html"
+                class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 border border-gray-700"
+              >
+                Sign In
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Side: Illustration -->
+          <div class="relative">
+            <div
+              class="bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 rounded-3xl p-12 relative overflow-hidden"
+            >
+              <!-- Decorative Elements -->
+              <div class="absolute inset-0 opacity-30">
+                <svg
+                  class="w-full h-full"
+                  viewBox="0 0 400 400"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  <!-- Network lines -->
+                  <line
+                    x1="50"
+                    y1="100"
+                    x2="150"
+                    y2="150"
+                    stroke="#60a5fa"
+                    stroke-width="3"
+                    class="glow"
+                  />
+                  <line
+                    x1="150"
+                    y1="150"
+                    x2="250"
+                    y2="120"
+                    stroke="#a78bfa"
+                    stroke-width="3"
+                    class="glow"
+                  />
+                  <line
+                    x1="250"
+                    y1="120"
+                    x2="350"
+                    y2="180"
+                    stroke="#f472b6"
+                    stroke-width="3"
+                    class="glow"
+                  />
+                  <line
+                    x1="100"
+                    y1="250"
+                    x2="200"
+                    y2="220"
+                    stroke="#60a5fa"
+                    stroke-width="3"
+                    class="glow"
+                  />
+                  <line
+                    x1="200"
+                    y1="220"
+                    x2="300"
+                    y2="280"
+                    stroke="#a78bfa"
+                    stroke-width="3"
+                    class="glow"
+                  />
+
+                  <!-- Nodes -->
+                  <circle
+                    cx="150"
+                    cy="150"
+                    r="15"
+                    fill="#3b82f6"
+                    opacity="0.6"
+                    class="glow"
+                  />
+                  <circle
+                    cx="250"
+                    cy="120"
+                    r="15"
+                    fill="#8b5cf6"
+                    opacity="0.6"
+                    class="glow"
+                  />
+                  <circle
+                    cx="200"
+                    cy="220"
+                    r="15"
+                    fill="#ec4899"
+                    opacity="0.6"
+                    class="glow"
+                  />
+                  <circle
+                    cx="100"
+                    cy="250"
+                    r="12"
+                    fill="#60a5fa"
+                    opacity="0.5"
+                  />
+                  <circle
+                    cx="300"
+                    cy="280"
+                    r="12"
+                    fill="#a78bfa"
+                    opacity="0.5"
+                  />
+                </svg>
+              </div>
+
+              <!-- Content Overlay -->
+              <div class="relative z-10 text-center">
+                <div
+                  class="w-32 h-32 bg-white bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm"
+                >
+                  <i class="fas fa-chart-line text-white text-5xl"></i>
+                </div>
+                <h3 class="text-white text-2xl font-bold mb-2">
+                  Smart Financial Tracking
+                </h3>
+                <p class="text-gray-300">
+                  Make informed decisions with real-time insights
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+          <div class="text-white text-xs opacity-70 flex items-center space-x-1">
+            <span>Made with</span>
+            <span class="text-purple-400 font-bold">V</span>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Mobile Layout -->
+    <div
+      class="lg:hidden h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
+    >
+      <!-- Logo -->
+      <div class="flex items-center space-x-3 mb-8">
+        <div
+          class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg"
+        >
+          <svg
+            class="w-10 h-10 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+            />
+          </svg>
+        </div>
+        <span class="text-white text-3xl font-bold">FinanceFlow</span>
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="text-white text-3xl font-bold text-center mb-4 leading-tight">
+        Empower Your
+        <span class="text-blue-500">Financial Journey</span>
+      </h1>
+
+      <!-- Description -->
+      <p
+        class="text-gray-400 text-base text-center mb-8 max-w-sm leading-relaxed"
+      >
+        Seamlessly manage, track, and optimize your expenses with FinanceFlow,
+        your trusted financial companion.
+      </p>
+
+      <!-- Features List -->
+      <div class="space-y-3 mb-8 w-full max-w-sm">
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-check-circle text-blue-500"></i>
+          <span class="text-gray-300">Track income and expenses</span>
+        </div>
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-check-circle text-blue-500"></i>
+          <span class="text-gray-300">Visual analytics and insights</span>
+        </div>
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-check-circle text-blue-500"></i>
+          <span class="text-gray-300">Smart categorization</span>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="w-full max-w-sm space-y-3">
+        <a
+          href="signup.html"
+          class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-center shadow-lg"
+        >
+          Get Started
+        </a>
+        <a
+          href="login.html"
+          class="block w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-center border border-gray-700"
+        >
+          Sign In
+        </a>
+      </div>
+
+      <!-- Footer
+      <div class="absolute bottom-6">
+        <div class="text-white text-xs opacity-70 flex items-center space-x-1">
+          <span>Made with</span>
+          <span class="text-purple-400 font-bold">V</span>
+        </div>
+      </div> -->
+    </div>
+
+    <style>
+      .glow {
+        filter: drop-shadow(0 0 4px currentColor);
+      }
+    </style>
+  </body>
+</html>

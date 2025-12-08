@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Transaction - FinanceFlow</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="assets/js/api.js"></script>
+    <script>
+      ensureAuthenticated();
+    </script>
+  </head>
+  <body class="bg-black min-h-screen">
+    <!-- Desktop Layout -->
+    <div class="hidden lg:flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-gray-900 flex flex-col border-r border-gray-800">
+        <!-- Logo -->
+        <div class="p-6 border-b border-gray-800">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                />
+              </svg>
+            </div>
+            <span class="text-white text-xl font-bold">FinTrack Pro</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 p-4 space-y-2">
+          <a
+            href="dashboard.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-gray-800 text-white"
+          >
+            <i class="fas fa-home w-5"></i>
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="history.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-list w-5"></i>
+            <span>Transactions</span>
+          </a>
+          <a
+            href="statistics.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-chart-bar w-5"></i>
+            <span>Statistics</span>
+          </a>
+          <a
+            href="settings.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-cog w-5"></i>
+            <span>Settings</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-y-auto bg-black">
+        <div class="flex items-center justify-center min-h-full p-8">
+          <!-- Rectangular Frame Container -->
+          <div
+            class="bg-gray-900 rounded-lg border border-gray-800 shadow-2xl p-8 w-full max-w-3xl"
+          >
+            <h1 class="text-white text-3xl font-bold mb-8">
+              Add New Transaction
+            </h1>
+
+            <form id="addTransactionForm" class="space-y-6">
+              <!-- Amount Field -->
+              <div>
+                <label class="block text-white text-sm font-medium mb-2"
+                  >Amount</label
+                >
+                <div class="relative">
+                  <span
+                    class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg"
+                    >₹</span
+                  >
+                  <input
+                    type="number"
+                    id="amount"
+                    name="amount"
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                    required
+                    class="input-box pl-8 text-2xl font-semibold bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700"
+                  />
+                </div>
+              </div>
+
+              <!-- Date & Time Pickers -->
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-white text-sm font-medium mb-2"
+                    >Date</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="fas fa-calendar absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    ></i>
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      required
+                      class="input-box pl-10 bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-white text-sm font-medium mb-2"
+                    >Time</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="fas fa-clock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    ></i>
+                    <input
+                      type="time"
+                      id="time"
+                      name="time"
+                      required
+                      class="input-box pl-10 bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Type Toggle -->
+              <div>
+                <label class="block text-white text-sm font-medium mb-2"
+                  >Type</label
+                >
+                <div class="flex space-x-2 bg-gray-800 p-1 rounded-lg">
+                  <button
+                    type="button"
+                    id="typeIncome"
+                    class="flex-1 py-3 px-4 rounded-lg text-white font-medium transition-colors type-toggle"
+                    data-type="income"
+                  >
+                    <i class="fas fa-arrow-up mr-2"></i>Income
+                  </button>
+                  <button
+                    type="button"
+                    id="typeExpense"
+                    class="flex-1 py-3 px-4 rounded-lg text-white font-medium transition-colors type-toggle bg-blue-600"
+                    data-type="expense"
+                  >
+                    <i class="fas fa-arrow-down mr-2"></i>Expense
+                  </button>
+                </div>
+                <input
+                  type="hidden"
+                  id="type"
+                  name="type"
+                  value="expense"
+                  required
+                />
+              </div>
+
+              <!-- Category Grid -->
+              <div>
+                <label class="block text-white text-sm font-medium mb-3"
+                  >Category</label
+                >
+                <div id="categoryGrid" class="grid grid-cols-4 gap-3">
+                  <!-- Categories will be loaded dynamically -->
+                </div>
+                <input type="hidden" id="category" name="category" required />
+              </div>
+
+              <!-- Note Field -->
+              <div>
+                <label class="block text-white text-sm font-medium mb-2"
+                  >Note (Optional)</label
+                >
+                <textarea
+                  id="note"
+                  name="note"
+                  rows="4"
+                  placeholder="Add a brief description for this transaction..."
+                  class="input-box resize-none bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700 w-full"
+                ></textarea>
+              </div>
+
+              <!-- Save Button -->
+              <div class="flex justify-end">
+                <button
+                  type="submit"
+                  class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
+                >
+                  Save Transaction
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile Layout -->
+    <div class="lg:hidden min-h-screen bg-black pb-20">
+      <!-- Header -->
+      <div
+        class="bg-gray-900 border-b border-gray-800 px-4 py-3 flex items-center"
+      >
+        <a href="dashboard.html" class="mr-4">
+          <i class="fas fa-arrow-left text-white text-lg"></i>
+        </a>
+        <h1 class="text-white text-lg font-semibold flex-1 text-center">
+          Add Transaction
+        </h1>
+        <div class="w-6"></div>
+        <!-- Spacer for centering -->
+      </div>
+
+      <!-- Form -->
+      <div class="p-4 space-y-6">
+        <!-- Amount Card -->
+        <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+          <div class="flex items-center space-x-4">
+            <span class="text-gray-400 text-2xl">₹</span>
+            <input
+              type="number"
+              id="amountMobile"
+              name="amount"
+              step="0.01"
+              min="0"
+              placeholder="0"
+              required
+              class="bg-transparent text-white text-4xl font-bold w-full outline-none"
+            />
+          </div>
+        </div>
+
+        <!-- Type Toggle -->
+        <div>
+          <div
+            class="flex space-x-2 bg-gray-900 p-1 rounded-lg border border-gray-800"
+          >
+            <button
+              type="button"
+              id="typeIncomeMobile"
+              class="flex-1 py-4 px-4 rounded-lg text-white font-medium transition-colors type-toggle-mobile"
+              data-type="income"
+            >
+              <i class="fas fa-arrow-up mb-1 block"></i>Income
+            </button>
+            <button
+              type="button"
+              id="typeExpenseMobile"
+              class="flex-1 py-4 px-4 rounded-lg text-white font-medium transition-colors type-toggle-mobile bg-blue-600"
+              data-type="expense"
+            >
+              <i class="fas fa-arrow-down mb-1 block"></i>Expense
+            </button>
+          </div>
+          <input
+            type="hidden"
+            id="typeMobile"
+            name="type"
+            value="expense"
+            required
+          />
+        </div>
+
+        <!-- Category Grid -->
+        <div>
+          <label class="block text-white text-sm font-medium mb-3"
+            >Select Category</label
+          >
+          <div id="categoryGridMobile" class="grid grid-cols-3 gap-3">
+            <!-- Categories will be loaded dynamically -->
+          </div>
+          <input type="hidden" id="categoryMobile" name="category" required />
+        </div>
+
+        <!-- Date and Time Pickers -->
+        <div class="space-y-4">
+          <div>
+            <label class="block text-white text-sm font-medium mb-2"
+              >Date</label
+            >
+            <div class="relative">
+              <i
+                class="fas fa-calendar absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              ></i>
+              <input
+                type="date"
+                id="dateMobile"
+                name="date"
+                required
+                class="input-box pl-10 bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700"
+              />
+            </div>
+          </div>
+          <div>
+            <label class="block text-white text-sm font-medium mb-2"
+              >Time</label
+            >
+            <div class="relative">
+              <i
+                class="fas fa-clock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              ></i>
+              <input
+                type="time"
+                id="timeMobile"
+                name="time"
+                required
+                class="input-box pl-10 bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Note Field -->
+        <div>
+          <label class="block text-white text-sm font-medium mb-2"
+            >Note (Optional)</label
+          >
+          <textarea
+            id="noteMobile"
+            name="note"
+            rows="3"
+            placeholder="Add a note about this transaction"
+            class="input-box resize-none bg-gray-800 text-white placeholder-gray-400 rounded-lg border border-gray-700 w-full"
+          ></textarea>
+        </div>
+
+        <!-- Save Button -->
+        <button
+          type="submit"
+          id="saveButtonMobile"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+        >
+          <i class="fas fa-check"></i>
+          <span>Save Transaction</span>
+        </button>
+      </div>
+
+      <!-- Footer -->
+      <div class="px-4 pb-24 pt-4">
+        <div
+          class="text-white text-xs opacity-70 flex items-center justify-center space-x-1"
+        >
+          <span>Made with</span>
+          <span class="text-purple-400 font-bold">A</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/add.js"></script>
+  </body>
+</html>

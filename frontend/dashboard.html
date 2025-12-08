@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - FinanceFlow</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="assets/js/api.js"></script>
+    <script>
+      ensureAuthenticated();
+    </script>
+  </head>
+  <body class="bg-black min-h-screen">
+    <!-- Desktop Layout -->
+    <div class="hidden lg:flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-gray-900 flex flex-col border-r border-gray-800">
+        <!-- Logo -->
+        <div class="p-6 border-b border-gray-800">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <span class="text-white text-xl font-bold">Daily Tracker</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 p-4 space-y-2">
+          <a
+            href="dashboard.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-gray-800 text-white"
+          >
+            <i class="fas fa-home w-5"></i>
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="history.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-list w-5"></i>
+            <span>Transactions</span>
+          </a>
+          <a
+            href="statistics.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-chart-bar w-5"></i>
+            <span>Statistics</span>
+          </a>
+          <a
+            href="settings.html"
+            class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
+          >
+            <i class="fas fa-cog w-5"></i>
+            <span>Settings</span>
+          </a>
+        </nav>
+
+        <!-- User Profile -->
+        <div class="p-4 border-t border-gray-800">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center"
+            >
+              <i class="fas fa-user text-gray-400"></i>
+            </div>
+            <div class="flex-1">
+              <p class="text-white text-sm font-medium" id="userName">
+                Loading...
+              </p>
+              <a href="#" class="text-gray-400 text-xs hover:text-white"
+                >View Profile</a
+              >
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-y-auto bg-black">
+        <div class="p-8">
+          <!-- Header -->
+          <div class="flex justify-between items-center mb-8">
+            <h1 class="text-white text-2xl font-bold" id="welcomeText">
+              Welcome, Loading...
+            </h1>
+            <a
+              href="add-transaction.html"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+            >
+              <i class="fas fa-plus"></i>
+              <span>Add Transaction</span>
+            </a>
+          </div>
+
+          <!-- Summary Cards -->
+          <div class="grid grid-cols-2 gap-6 mb-8">
+            <!-- Total Balance Card -->
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-gray-400 text-sm font-medium">Total Balance</h3>
+                <a href="#" class="text-blue-500 text-xs hover:text-blue-400"
+                  >View Details</a
+                >
+              </div>
+              <p class="text-white text-3xl font-bold mb-2" id="totalBalance">
+                ₹0.00
+              </p>
+              <p class="text-green-500 text-sm flex items-center">
+                <i class="fas fa-arrow-up mr-1"></i>
+                <span id="balanceChange">₹0.00 (0%) vs. last month</span>
+              </p>
+            </div>
+
+            <!-- Expense This Month Card -->
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <div class="flex items-center space-x-2 mb-4">
+                <i class="fas fa-shopping-cart text-white"></i>
+                <h3 class="text-gray-400 text-sm font-medium">
+                  Expense This Month
+                </h3>
+              </div>
+              <p class="text-white text-3xl font-bold mb-2" id="monthlyExpense">
+                ₹0.00
+              </p>
+              <p class="text-gray-400 text-sm" id="expenseRemaining">
+                Remaining: ₹0.00
+              </p>
+            </div>
+
+            <!-- Income This Month Card -->
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <div class="flex items-center space-x-2 mb-4">
+                <i class="fas fa-file-invoice text-white"></i>
+                <h3 class="text-gray-400 text-sm font-medium">
+                  Income This Month
+                </h3>
+              </div>
+              <p class="text-white text-3xl font-bold mb-2" id="monthlyIncome">
+                ₹0.00
+              </p>
+              <p class="text-gray-400 text-sm" id="incomeExpected">
+                Expected: ₹0.00
+              </p>
+            </div>
+
+            <!-- Savings Goal Progress Card -->
+            <div class="bg-gray-900 rounded-lg p-6 border border-gray-800">
+              <div class="flex items-center space-x-2 mb-4">
+                <i class="fas fa-question-circle text-white"></i>
+                <h3 class="text-gray-400 text-sm font-medium">
+                  Savings Goal Progress
+                </h3>
+              </div>
+              <p
+                class="text-white text-3xl font-bold mb-2"
+                id="savingsProgress"
+              >
+                0%
+              </p>
+              <p class="text-gray-400 text-sm" id="savingsAmount">
+                ₹0 / ₹0 Saved
+              </p>
+            </div>
+          </div>
+
+          <!-- Top Spending Category -->
+          <div class="bg-gray-900 rounded-lg p-6 border border-gray-800 mb-8">
+            <div class="flex items-center space-x-2 mb-4">
+              <i class="fas fa-utensils text-white"></i>
+              <h3 class="text-white font-medium">Top Spending Category</h3>
+            </div>
+            <p class="text-white text-2xl font-bold mb-2" id="topCategory">
+              Food & Dining
+            </p>
+            <p class="text-gray-400 text-sm" id="topCategoryAmount">
+              Total: ₹0.00
+            </p>
+          </div>
+
+          <!-- Recent Transactions -->
+          <div
+            class="bg-gray-900 rounded-lg border border-gray-800 overflow-hidden"
+          >
+            <div
+              class="p-6 border-b border-gray-800 flex justify-between items-center"
+            >
+              <h3 class="text-white font-medium">Recent Transactions</h3>
+              <a
+                href="history.html"
+                class="text-blue-500 text-sm hover:text-blue-400"
+                >View All</a
+              >
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-800">
+                  <tr>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    >
+                      DATE
+                    </th>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    >
+                      CATEGORY
+                    </th>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    >
+                      DESCRIPTION
+                    </th>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    >
+                      TYPE
+                    </th>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider"
+                    >
+                      AMOUNT
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="recentTransactions" class="divide-y divide-gray-800">
+                  <tr>
+                    <td colspan="5" class="px-6 py-8 text-center text-gray-400">
+                      Loading transactions...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-8 pb-4">
+          <div
+            class="text-white text-xs opacity-70 flex items-center space-x-1"
+          >
+            <span>Made with</span>
+            <span class="text-purple-400 font-bold">A</span>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile Layout -->
+    <div class="lg:hidden min-h-screen bg-black pb-20">
+      <!-- Header -->
+      <div class="p-4 flex items-center space-x-3 border-b border-gray-800">
+        <div
+          class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center"
+        >
+          <svg
+            class="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+            />
+          </svg>
+        </div>
+        <h1 class="text-white text-lg font-bold">Dashboard</h1>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="p-4 space-y-4">
+        <!-- Total Balance Card -->
+        <div class="bg-blue-900 rounded-lg p-6">
+          <p class="text-gray-300 text-sm mb-2">Total Balance</p>
+          <p class="text-white text-3xl font-bold mb-1" id="totalBalanceMobile">
+            ₹0.00
+          </p>
+          <p class="text-gray-400 text-xs">Updated in real-time</p>
+        </div>
+
+        <!-- Income and Expense Cards -->
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Income Card -->
+          <div class="bg-gray-900 rounded-lg p-4 border border-gray-800">
+            <div class="flex items-center space-x-2 mb-2">
+              <div
+                class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center"
+              >
+                <i class="fas fa-home text-white text-xs"></i>
+              </div>
+              <p class="text-gray-400 text-xs">Income This Month</p>
+            </div>
+            <p
+              class="text-white text-xl font-bold mb-1"
+              id="monthlyIncomeMobile"
+            >
+              ₹0.00
+            </p>
+            <p class="text-gray-500 text-xs">vs. Last Month</p>
+          </div>
+
+          <!-- Expense Card -->
+          <div class="bg-gray-900 rounded-lg p-4 border border-gray-800">
+            <div class="flex items-center space-x-2 mb-2">
+              <div
+                class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center"
+              >
+                <i class="fas fa-file-invoice text-white text-xs"></i>
+              </div>
+              <p class="text-gray-400 text-xs">Expense This Month</p>
+            </div>
+            <p
+              class="text-red-500 text-xl font-bold mb-1"
+              id="monthlyExpenseMobile"
+            >
+              ₹0.00
+            </p>
+            <p class="text-gray-500 text-xs">vs. Last Month</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Transactions -->
+      <div class="px-4 mb-4">
+        <h2 class="text-white font-bold mb-4">Recent Transactions</h2>
+        <div id="recentTransactionsMobile" class="space-y-2">
+          <div class="text-gray-400 text-center py-8">
+            Loading transactions...
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Action Button -->
+      <a
+        href="add-transaction.html"
+        class="fixed bottom-24 right-6 w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center shadow-lg z-10 transition-colors"
+      >
+        <i class="fas fa-plus text-white text-xl"></i>
+      </a>
+
+      <!-- Bottom Navigation -->
+      <nav
+        class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 flex justify-around items-center py-2"
+      >
+        <a
+          href="dashboard.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-home text-blue-500 text-lg"></i>
+          <span class="text-blue-500 text-xs font-medium">Home</span>
+        </a>
+        <a
+          href="history.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-clock text-gray-400 text-lg"></i>
+          <span class="text-gray-400 text-xs">Trans</span>
+        </a>
+        <a
+          href="statistics.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-chart-bar text-gray-400 text-lg"></i>
+          <span class="text-gray-400 text-xs">Stats</span>
+        </a>
+        <a
+          href="settings.html"
+          class="flex flex-col items-center space-y-1 py-2"
+        >
+          <i class="fas fa-cog text-gray-400 text-lg"></i>
+          <span class="text-gray-400 text-xs">Settings</span>
+        </a>
+      </nav>
+
+      <!-- Footer -->
+      <div class="px-4 pb-24 pt-4">
+        <div
+          class="text-white text-xs opacity-70 flex items-center justify-center space-x-1"
+        >
+          <span>Made with</span>
+          <span class="text-purple-400 font-bold">A</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+  </body>
+</html>

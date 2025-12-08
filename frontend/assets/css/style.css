@@ -1,0 +1,321 @@
+/* ============================================
+   Input Box Component
+   ============================================ */
+.input-box {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #1f2937; /* gray-800 */
+  border: none;
+  border-radius: 0.5rem;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+/* Ensure textarea uses input-box styling */
+textarea.input-box {
+  background-color: #1f2937 !important;
+  resize: vertical;
+}
+
+.input-box::placeholder {
+  color: #9ca3af; /* gray-400 */
+  opacity: 1;
+}
+
+.input-box:focus {
+  background-color: #374151; /* gray-700 */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); /* blue-500 with opacity */
+}
+
+.input-box:hover {
+  background-color: #374151; /* gray-700 */
+}
+
+/* Select dropdown styling */
+.input-box select,
+select.input-box {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.25rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Input with icon padding */
+.input-box.pl-10 {
+  padding-left: 2.5rem;
+}
+
+/* Mobile input box adjustments */
+@media (max-width: 1024px) {
+  .input-box {
+    padding: 0.875rem 1rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* ============================================
+   Sidebar Desktop
+   ============================================ */
+.sidebar-desktop {
+  width: 16rem; /* w-64 */
+  background-color: #111827; /* gray-900 */
+  border-right: 1px solid #1f2937; /* border-gray-800 */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-desktop .logo-section {
+  padding: 1.5rem; /* p-6 */
+  border-bottom: 1px solid #1f2937; /* border-gray-800 */
+}
+
+.sidebar-desktop .nav-section {
+  flex: 1;
+  padding: 1rem; /* p-4 */
+}
+
+.sidebar-desktop .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* space-x-3 */
+  padding: 0.75rem 1rem; /* px-4 py-3 */
+  border-radius: 0.5rem; /* rounded-lg */
+  color: #9ca3af; /* text-gray-400 */
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.sidebar-desktop .nav-item:hover {
+  background-color: #1f2937; /* bg-gray-800 */
+  color: #ffffff; /* text-white */
+}
+
+.sidebar-desktop .nav-item.active {
+  background-color: #2563eb; /* bg-blue-600 */
+  color: #ffffff; /* text-white */
+}
+
+.sidebar-desktop .footer-section {
+  padding: 1rem; /* p-4 */
+  border-top: 1px solid #1f2937; /* border-gray-800 */
+}
+
+/* ============================================
+   Bottom Navigation Mobile
+   ============================================ */
+.bottom-nav-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #111827; /* bg-gray-900 */
+  border-top: 1px solid #1f2937; /* border-gray-800 */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0; /* py-2 */
+  z-index: 50;
+}
+
+.bottom-nav-mobile .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem; /* space-y-1 */
+  padding: 0.5rem; /* py-2 */
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.bottom-nav-mobile .nav-item i {
+  font-size: 1.125rem; /* text-lg */
+}
+
+.bottom-nav-mobile .nav-item span {
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 500;
+}
+
+.bottom-nav-mobile .nav-item.active i,
+.bottom-nav-mobile .nav-item.active span {
+  color: #3b82f6; /* text-blue-500 */
+}
+
+.bottom-nav-mobile .nav-item:not(.active) i,
+.bottom-nav-mobile .nav-item:not(.active) span {
+  color: #9ca3af; /* text-gray-400 */
+}
+
+/* Ensure content doesn't hide behind bottom nav */
+@media (max-width: 1024px) {
+  body {
+    padding-bottom: 5rem; /* pb-20 */
+  }
+}
+
+/* ============================================
+   Card Component
+   ============================================ */
+.card {
+  background-color: #111827; /* bg-gray-900 */
+  border-radius: 0.5rem; /* rounded-lg */
+  border: 1px solid #1f2937; /* border-gray-800 */
+  padding: 1.5rem; /* p-6 */
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  border-color: #374151; /* border-gray-700 */
+}
+
+.card.card-sm {
+  padding: 1rem; /* p-4 */
+}
+
+.card.card-md {
+  padding: 1.5rem; /* p-6 */
+}
+
+.card.card-lg {
+  padding: 2rem; /* p-8 */
+}
+
+.card.card-no-padding {
+  padding: 0;
+}
+
+.card .card-header {
+  padding: 1.5rem; /* p-6 */
+  border-bottom: 1px solid #1f2937; /* border-gray-800 */
+}
+
+.card .card-body {
+  padding: 1.5rem; /* p-6 */
+}
+
+.card .card-footer {
+  padding: 1.5rem; /* p-6 */
+  border-top: 1px solid #1f2937; /* border-gray-800 */
+}
+
+/* Card variants */
+.card.card-elevated {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card.card-bordered {
+  border-width: 1px;
+}
+
+/* ============================================
+   Section Title
+   ============================================ */
+.section-title {
+  color: #ffffff; /* text-white */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 1.5rem; /* mb-6 */
+  line-height: 1.2;
+}
+
+.section-title.section-title-sm {
+  font-size: 1.125rem; /* text-lg */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.section-title.section-title-md {
+  font-size: 1.5rem; /* text-2xl */
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.section-title.section-title-lg {
+  font-size: 1.875rem; /* text-3xl */
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.section-title.section-title-xl {
+  font-size: 2.25rem; /* text-4xl */
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+/* Section subtitle */
+.section-subtitle {
+  color: #9ca3af; /* text-gray-400 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 400;
+  margin-top: 0.25rem; /* mt-1 */
+  line-height: 1.5;
+}
+
+/* ============================================
+   Typography Utilities
+   ============================================ */
+.text-heading {
+  color: #ffffff; /* text-white */
+  font-weight: 700; /* font-bold */
+  line-height: 1.2;
+}
+
+.text-body {
+  color: #d1d5db; /* text-gray-300 */
+  font-size: 0.9375rem; /* text-sm */
+  line-height: 1.5;
+}
+
+.text-muted {
+  color: #9ca3af; /* text-gray-400 */
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.5;
+}
+
+/* ============================================
+   Spacing Utilities
+   ============================================ */
+.spacing-section {
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.spacing-section-sm {
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.spacing-section-md {
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.spacing-section-lg {
+  margin-bottom: 2rem; /* mb-8 */
+}
+
+.spacing-section-xl {
+  margin-bottom: 3rem; /* mb-12 */
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (max-width: 1024px) {
+  .card {
+    padding: 1rem; /* p-4 */
+  }
+
+  .section-title.section-title-lg {
+    font-size: 1.5rem; /* text-2xl */
+    margin-bottom: 1.5rem; /* mb-6 */
+  }
+
+  .section-title.section-title-xl {
+    font-size: 1.875rem; /* text-3xl */
+    margin-bottom: 1.5rem; /* mb-6 */
+  }
+}
