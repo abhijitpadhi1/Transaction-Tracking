@@ -1,7 +1,3 @@
-// Frontend auth helpers (signup/login) — expects `assets/js/api.js` to be
-// loaded before this file. That module exposes `window.API_BASE_URL` and
-// token helpers like `saveToken()`.
-
 // =============================
 // Inline form error helpers
 // =============================
@@ -28,8 +24,6 @@ function clearFormError(elId) {
 // SIGNUP
 // =============================
 async function signup() {
-  // Accept an optional `form` object (signup(formData) callers from HTML use this).
-  // If not provided, fall back to reading from DOM (for backwards compatibility).
   const args = arguments[0];
   let username, email, password, confirmPassword, currency;
 
@@ -44,15 +38,26 @@ async function signup() {
     username = (document.getElementById("userid") || {}).value || "";
     email = (document.getElementById("email") || {}).value || "";
     password = (document.getElementById("password") || {}).value || "";
-    confirmPassword = (document.getElementById("confirmPassword") || {}).value || "";
+    confirmPassword =
+      (document.getElementById("confirmPassword") || {}).value || "";
     currency = (document.getElementById("currency") || {}).value || "INR";
 
     // Mobile fallbacks
-    if (!username) username = (document.getElementById("useridMobile") || {}).value || username;
-    if (!email) email = (document.getElementById("emailMobile") || {}).value || email;
-    if (!password) password = (document.getElementById("passwordMobile") || {}).value || password;
-    if (!confirmPassword) confirmPassword = (document.getElementById("confirmPasswordMobile") || {}).value || confirmPassword;
-    if (!currency) currency = (document.getElementById("currencyMobile") || {}).value || currency;
+    if (!username)
+      username =
+        (document.getElementById("useridMobile") || {}).value || username;
+    if (!email)
+      email = (document.getElementById("emailMobile") || {}).value || email;
+    if (!password)
+      password =
+        (document.getElementById("passwordMobile") || {}).value || password;
+    if (!confirmPassword)
+      confirmPassword =
+        (document.getElementById("confirmPasswordMobile") || {}).value ||
+        confirmPassword;
+    if (!currency)
+      currency =
+        (document.getElementById("currencyMobile") || {}).value || currency;
   }
 
   clearFormError("signupError");
@@ -66,6 +71,7 @@ async function signup() {
     return;
   }
 
+  // Signup Data object
   const signupData = {
     username: username,
     email: email,

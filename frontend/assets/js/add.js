@@ -7,19 +7,23 @@ const CATEGORIES_API =
 // Default categories if API fails (type can be 'income' or 'expense')
 // For categories that work with both, we'll show them for both types
 const DEFAULT_CATEGORIES = [
+  // Expense categories
   { name: "Food", icon: "fa-utensils", type: "expense" },
   { name: "Shopping", icon: "fa-shopping-bag", type: "expense" },
   { name: "Transport", icon: "fa-car", type: "expense" },
+  { name: "Travel", icon: "fa-plane", type: "expense" },
   { name: "Home", icon: "fa-home", type: "expense" },
-  { name: "Work", icon: "fa-briefcase", type: "income" },
   { name: "Health", icon: "fa-heart", type: "expense" },
   { name: "Entertainment", icon: "fa-film", type: "expense" },
   { name: "Education", icon: "fa-graduation-cap", type: "expense" },
   { name: "Gifts", icon: "fa-gift", type: "expense" },
-  { name: "Salary", icon: "fa-dollar-sign", type: "income" },
   { name: "Investments", icon: "fa-chart-line", type: "expense" },
+  { name: "Bills", icon: "fa-file-invoice-dollar", type: "expense" },
   { name: "Other", icon: "fa-ellipsis-h", type: "expense" },
-  // Additional income categories
+  // Income categories
+  { name: "Salary", icon: "fa-money-bill-alt", type: "income" },
+  { name: "PocketMoney", icon: "fa-rupee-sign", type: "income" },
+  { name: "Work", icon: "fa-briefcase", type: "income" },
   { name: "Freelance", icon: "fa-laptop", type: "income" },
   { name: "Business", icon: "fa-briefcase", type: "income" },
 ];
@@ -121,9 +125,6 @@ let allCategories = [];
 let selectedCategory = null;
 
 async function updateCategoryGrid() {
-  // Choose the active type control based on visibility so mobile and desktop
-  // layouts behave independently. Prefer mobile when visible to avoid the
-  // desktop hidden input taking precedence.
   function getVisibleValue(ids, fallback = "expense") {
     for (const id of ids) {
       const el = document.getElementById(id);
@@ -132,7 +133,6 @@ async function updateCategoryGrid() {
         const style = window.getComputedStyle(el);
         if (style && style.display !== "none") return el.value;
       } catch (e) {
-        // If getComputedStyle fails for some reason, fall back to offsetParent
         if (el.offsetParent !== null) return el.value;
       }
     }

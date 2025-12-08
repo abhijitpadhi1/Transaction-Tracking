@@ -53,6 +53,7 @@ function getCategoryIcon(category) {
     Investment: "fa-chart-line",
     Investments: "fa-chart-line",
     Utilities: "fa-bolt",
+    Bills: "fa-file-invoice-dollar",
     Coffee: "fa-coffee",
   };
 

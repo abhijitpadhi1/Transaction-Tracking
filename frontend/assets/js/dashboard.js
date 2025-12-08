@@ -45,10 +45,16 @@ function getCategoryIcon(category) {
     Transport: "fa-car",
     Entertainment: "fa-film",
     Health: "fa-heart",
+    Gifts: "fa-gift",
     Education: "fa-graduation-cap",
     Shopping: "fa-shopping-bag",
     Bills: "fa-file-invoice",
     Other: "fa-ellipsis-h",
+    Salary: "fa-money-bill-alt",
+    PocketMoney: "fa-rupee-sign",
+    Work: "fa-briefcase",
+    Freelance: "fa-laptop",
+    Business: "fa-briefcase",
   };
 
   // Try to match category (case-insensitive)
@@ -153,6 +159,7 @@ async function loadRecentTransactions() {
     const token = getAuthToken();
     if (!token) return;
 
+    // Fetch recent transactions
     const response = await fetch(`${API_BASE_URL}/recent`, {
       method: "GET",
       headers: {
@@ -161,6 +168,7 @@ async function loadRecentTransactions() {
       },
     });
 
+    // Access Check
     if (!response.ok) {
       if (response.status === 401) {
         localStorage.removeItem("access_token");
