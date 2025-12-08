@@ -121,9 +121,30 @@ let allCategories = [];
 let selectedCategory = null;
 
 async function updateCategoryGrid() {
-  const type =
-    document.getElementById("type").value ||
-    document.getElementById("typeMobile").value;
+  // Choose the active type control based on visibility so mobile and desktop
+  // layouts behave independently. Prefer mobile when visible to avoid the
+  // desktop hidden input taking precedence.
+  function getVisibleValue(ids, fallback = "expense") {
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      try {
+        const style = window.getComputedStyle(el);
+        if (style && style.display !== "none") return el.value;
+      } catch (e) {
+        // If getComputedStyle fails for some reason, fall back to offsetParent
+        if (el.offsetParent !== null) return el.value;
+      }
+    }
+    // If none are visible, return the first non-empty value or fallback
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el && el.value) return el.value;
+    }
+    return fallback;
+  }
+
+  const type = getVisibleValue(["typeMobile", "type"]);
 
   // Filter categories by type (API returns 'income' or 'expense')
   const filteredCategories = allCategories.filter((cat) => {
