@@ -120,7 +120,7 @@
               Start tracking your finances with ease.
             </p>
 
-            <form id="signupForm" class="space-y-5">
+            <form id="signupForm" class="space-y-5" novalidate>
               <!-- Full Name -->
               <div>
                 <label
@@ -500,38 +500,55 @@
   <script src="assets/js/auth.js"></script>
     <script>
       // Handle form submission for both desktop and mobile
-      document
-        .getElementById("signupForm")
-        ?.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const formData = {
-            fullname: document.getElementById("fullname").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
-            userid: document.getElementById("userid").value,
-            password: document.getElementById("password").value,
-            confirmPassword: document.getElementById("confirmPassword").value,
-            currency: document.getElementById("currency").value,
-          };
-          signup(formData);
-        });
+      (function () {
+        var desktopForm = document.getElementById("signupForm");
+        if (desktopForm) {
+          desktopForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            try {
+              var formData = {
+                fullname: document.getElementById("fullname").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                userid: document.getElementById("userid").value,
+                password: document.getElementById("password").value,
+                confirmPassword: document.getElementById("confirmPassword").value,
+                currency: document.getElementById("currency").value,
+              };
+              console.log("signup form submit (desktop)", formData);
+              signup(formData).catch(function (err) {
+                console.error("signup() failed:", err);
+              });
+            } catch (err) {
+              console.error("signup handler error:", err);
+            }
+          });
+        }
 
-      document
-        .getElementById("signupFormMobile")
-        ?.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const formData = {
-            fullname: document.getElementById("fullnameMobile").value,
-            email: document.getElementById("emailMobile").value,
-            phone: document.getElementById("phoneMobile").value,
-            userid: document.getElementById("useridMobile").value,
-            password: document.getElementById("passwordMobile").value,
-            confirmPassword: document.getElementById("confirmPasswordMobile")
-              .value,
-            currency: document.getElementById("currencyMobile").value,
-          };
-          signup(formData);
-        });
+        var mobileForm = document.getElementById("signupFormMobile");
+        if (mobileForm) {
+          mobileForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            try {
+              var formData = {
+                fullname: document.getElementById("fullnameMobile").value,
+                email: document.getElementById("emailMobile").value,
+                phone: document.getElementById("phoneMobile").value,
+                userid: document.getElementById("useridMobile").value,
+                password: document.getElementById("passwordMobile").value,
+                confirmPassword: document.getElementById("confirmPasswordMobile").value,
+                currency: document.getElementById("currencyMobile").value,
+              };
+              console.log("signup form submit (mobile)", formData);
+              signup(formData).catch(function (err) {
+                console.error("signup() failed:", err);
+              });
+            } catch (err) {
+              console.error("mobile signup handler error:", err);
+            }
+          });
+        }
+      })();
     </script>
   </body>
 </html>

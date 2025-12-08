@@ -193,7 +193,7 @@
             Log in to continue managing your finances.
           </p>
 
-          <form id="loginForm" class="space-y-5">
+          <form id="loginForm" class="space-y-5" novalidate>
             <!-- Email or User ID -->
             <div>
               <label
@@ -396,27 +396,45 @@
     <script src="assets/js/auth.js"></script>
     <script>
       // Handle form submission for both desktop and mobile
-      document
-        .getElementById("loginForm")
-        ?.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const credentials = {
-            username: document.getElementById("emailOrUserid").value,
-            password: document.getElementById("password").value,
-          };
-          login(credentials);
-        });
+      (function () {
+        var desktopForm = document.getElementById("loginForm");
+        if (desktopForm) {
+          desktopForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            try {
+              var credentials = {
+                username: document.getElementById("emailOrUserid").value,
+                password: document.getElementById("password").value,
+              };
+              console.log("login form submit (desktop)", credentials);
+              login(credentials).catch(function (err) {
+                console.error("login() failed:", err);
+              });
+            } catch (err) {
+              console.error("login handler error:", err);
+            }
+          });
+        }
 
-      document
-        .getElementById("loginFormMobile")
-        ?.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const credentials = {
-            username: document.getElementById("emailOrUseridMobile").value,
-            password: document.getElementById("passwordMobile").value,
-          };
-          login(credentials);
-        });
+        var mobileForm = document.getElementById("loginFormMobile");
+        if (mobileForm) {
+          mobileForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            try {
+              var credentials = {
+                username: document.getElementById("emailOrUseridMobile").value,
+                password: document.getElementById("passwordMobile").value,
+              };
+              console.log("login form submit (mobile)", credentials);
+              login(credentials).catch(function (err) {
+                console.error("login() failed:", err);
+              });
+            } catch (err) {
+              console.error("mobile login handler error:", err);
+            }
+          });
+        }
+      })();
     </script>
     <style>
       /* Glow effect for network illustration */
