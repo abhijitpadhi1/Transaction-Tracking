@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException, Depends, Header
 from pydantic import BaseModel, EmailStr
 from ..db import db
 from ..utils.jwt_handler import hash_password, verify_password, create_access_token, decode_access_token
+from pymongo.errors import PyMongoError
 import uuid
 from datetime import datetime, timezone
 
@@ -28,29 +29,41 @@ class LoginModel(BaseModel):
 @router.post("/signup")
 async def signup(user: SignupModel) -> dict:
     """Endpoint to register a new user."""
-    # Check if user exists
-    existing = await db.users.find_one({"username": user.username})
-    if existing:
-        raise HTTPException(400, "Username already exists")
+    normalized_username = user.username.strip()
+    normalized_email = user.email.strip().lower()
 
-    existing_email = await db.users.find_one({"email": user.email})
-    if existing_email:
-        raise HTTPException(400, "Email already exists")
+    if not normalized_username:
+        raise HTTPException(400, "Username cannot be empty")
+
+    try:
+        # Check if user exists
+        existing = await db.users.find_one({"username": normalized_username})
+        if existing:
+            raise HTTPException(400, "Username already exists")
+
+        existing_email = await db.users.find_one({"email": normalized_email})
+        if existing_email:
+            raise HTTPException(400, "Email already exists")
+    except PyMongoError:
+        raise HTTPException(503, "Database unavailable. Please try again later.")
 
     # Create new user
     user_id = str(uuid.uuid4())
 
     new_user = {
         "_id": user_id,
-        "username": user.username,
-        "email": user.email,
+        "username": normalized_username,
+        "email": normalized_email,
         "password_hash": hash_password(user.password),
         "preferred_currency": user.preferred_currency,
         "created_at": datetime.now(timezone.utc)
     }
 
     # Insert into DB
-    await db.users.insert_one(new_user)
+    try:
+        await db.users.insert_one(new_user)
+    except PyMongoError:
+        raise HTTPException(503, "Database unavailable. Please try again later.")
 
     return {"message": "User created successfully", "user_id": user_id}
 
@@ -60,8 +73,20 @@ async def signup(user: SignupModel) -> dict:
 @router.post("/login")
 async def login(credentials: LoginModel) -> dict:
     """Endpoint to authenticate a user and return a JWT."""
+    identifier = credentials.username.strip()
+
     # Fetch user from DB
-    user = await db.users.find_one({"username": credentials.username})
+    try:
+        user = await db.users.find_one(
+            {
+                "$or": [
+                    {"username": identifier},
+                    {"email": identifier.lower()},
+                ]
+            }
+        )
+    except PyMongoError:
+        raise HTTPException(503, "Database unavailable. Please try again later.")
     if not user:
         raise HTTPException(401, "Invalid username or password")
 

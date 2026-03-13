@@ -7,6 +7,8 @@ const isLocalhost =
 const HF_BASE_URL = "https://abhijitpadhi1-transaction-tracking.hf.space/";
 
 // Final BASE_URL which all other JS files should use
-window.API_BASE_URL = isLocal ? "http://127.0.0.1:8000" : HF_BASE_URL;
+window.API_BASE_URL = isLocalhost
+  ? "http://127.0.0.1:8000"
+  : HF_BASE_URL.replace(/\/$/, "");
 
 // console.log("API Base URL:", BASE_URL);

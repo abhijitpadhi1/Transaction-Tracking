@@ -2,10 +2,12 @@
 // Inline form error helpers
 // =============================
 function showFormError(elId, message) {
-  const el = document.getElementById(elId);
-  if (el) {
-    el.textContent = message;
-    el.style.display = "block";
+  const els = document.querySelectorAll(`#${elId}`);
+  if (els.length) {
+    els.forEach((el) => {
+      el.textContent = message;
+      el.style.display = "block";
+    });
   } else {
     // Fallback to alert when the page doesn't include an error container
     alert(message);
@@ -13,11 +15,11 @@ function showFormError(elId, message) {
 }
 
 function clearFormError(elId) {
-  const el = document.getElementById(elId);
-  if (el) {
+  const els = document.querySelectorAll(`#${elId}`);
+  els.forEach((el) => {
     el.textContent = "";
     el.style.display = "none";
-  }
+  });
 }
 
 // =============================
