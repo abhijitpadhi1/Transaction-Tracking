@@ -4,11 +4,26 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
+from contextlib import asynccontextmanager
+
+from backend.db import init_db, check_connection
 
 # Import routers from the local package (use relative import so backend can be used as a package)
 from .routers import auth, transactions, categories, settings, analytics
 
-app = FastAPI(title="Transaction Tracker API")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("Starting API...")
+
+    await check_connection()
+    await init_db()
+
+    yield
+
+    print("Shutting down API...")
+
+app = FastAPI(lifespan=lifespan, title="Transaction Tracker API")
+
 
 # ======================
 #   CORS CONFIGURATION

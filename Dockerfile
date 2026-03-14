@@ -33,9 +33,9 @@ RUN uv sync --frozen
 # ============================
 # 6. Expose HF Spaces port
 # ============================
-EXPOSE 7860
+EXPOSE 8000
 
 # ============================
 # 7. Start FastAPI server
 # ============================
-CMD ["uv", "run", "uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["uv", "run", "uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
