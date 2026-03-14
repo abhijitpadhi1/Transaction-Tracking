@@ -22,7 +22,7 @@ jobs:
 
           git clone https://user:$HF_ACCESS_TOKEN@huggingface.co/spaces/abhijitpadhi1/Transaction-Tracking space
 
-          rsync -av --exclude space --exclude .git . space/
+          rsync -av --exclude space --exclude .git --exclude screenshots . space/
 
           cd space
 
