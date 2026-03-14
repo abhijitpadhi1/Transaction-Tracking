@@ -1,6 +1,6 @@
 // API Base URL
 const API_BASE_URL =
-  (window.API_BASE_URL || "http://127.0.0.1:8000") + "/transactions";
+  (window.API_BASE_URL || "http://127.0.0.1:7860") + "/transactions";
 
 // Get authentication token from localStorage
 function getAuthToken() {

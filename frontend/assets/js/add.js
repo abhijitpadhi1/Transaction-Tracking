@@ -1,8 +1,8 @@
 // API Base URL (use centralized value from api.js when available)
 const API_BASE_URL =
-  (window.API_BASE_URL || "http://127.0.0.1:8000") + "/transactions";
+  (window.API_BASE_URL || "http://127.0.0.1:7860") + "/transactions";
 const CATEGORIES_API =
-  (window.API_BASE_URL || "http://127.0.0.1:8000") + "/categories";
+  (window.API_BASE_URL || "http://127.0.0.1:7860") + "/categories";
 
 // Default categories if API fails (type can be 'income' or 'expense')
 // For categories that work with both, we'll show them for both types

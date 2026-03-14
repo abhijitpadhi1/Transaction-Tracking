@@ -8,7 +8,7 @@
   try {
     const host = window.location && window.location.hostname;
     if (host === "127.0.0.1" || host === "localhost") {
-      window.API_BASE_URL = "http://127.0.0.1:8000";
+      window.API_BASE_URL = "http://127.0.0.1:7860";
     } else if (
       window.location &&
       window.location.origin &&
@@ -17,10 +17,10 @@
       window.API_BASE_URL = window.location.origin;
     } else {
       // Fallback to localhost backend
-      window.API_BASE_URL = "http://127.0.0.1:8000";
+      window.API_BASE_URL = "http://127.0.0.1:7860";
     }
   } catch (e) {
-    window.API_BASE_URL = "http://127.0.0.1:8000";
+    window.API_BASE_URL = "http://127.0.0.1:7860";
   }
 })();
 

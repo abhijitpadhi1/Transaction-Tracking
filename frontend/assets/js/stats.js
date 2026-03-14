@@ -1,6 +1,6 @@
 // API Base URL
 const API_BASE_URL =
-  (window.API_BASE_URL || "http://127.0.0.1:8000") + "/analytics";
+  (window.API_BASE_URL || "http://127.0.0.1:7860") + "/analytics";
 
 // Chart instances
 let pieChart = null;
