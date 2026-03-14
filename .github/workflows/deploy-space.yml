@@ -20,7 +20,7 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
 
-          git clone https://user:$HF_ACCESS_TOKEN@https://huggingface.co/spaces/abhijitpadhi1/Transaction-Tracking space
+          git clone https://user:$HF_ACCESS_TOKEN@huggingface.co/spaces/abhijitpadhi1/Transaction-Tracking space
 
           rsync -av --exclude space --exclude .git . space/
 
