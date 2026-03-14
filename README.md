@@ -36,7 +36,7 @@ This project is a simple but complete personal **transaction tracking system** t
 🔗 **Frontend + Backend (HuggingFace Space):**
 
 ```
-https://abhijitpadhi1-transaction-tracker.hf.space
+https://abhijitpadhi1-transaction-tracking.hf.space/
 ```
 
 ---
@@ -225,7 +225,7 @@ MongoDB database: `TransactionTracking`
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/<your-repo>/transaction-tracker.git
+git clone https://github.com/abhijitpadhi1/Transaction-Tracking.git
 cd transaction-tracker
 ```
 
@@ -246,8 +246,8 @@ pip install -r requirements.txt
 ### 4️⃣ Create `.env` file
 
 ```
-SECRET_KEY=your_local_secret_key
-MONGODB_URI=your_mongodb_uri_here
+SECRET_KEY=<your_local_secret_key>
+MONGODB_URI=<your_mongodb_uri_here>
 ACCESS_TOKEN_EXPIRE_MINUTES=1440
 ```
 
@@ -260,7 +260,7 @@ uvicorn backend.main:app --reload
 Backend will run at:
 
 ```
-http://127.0.0.1:8000
+http://127.0.0.1:7680
 ```
 
 ### 6️⃣ Open frontend
@@ -337,11 +337,26 @@ PORT=7860
 
 # 🎯 **Screenshots**
 
-_Add screenshots of your frontend UI here._
+### Landing Page
+![Landing Page](screenshots/landing-page.png)
 
-```
-/screenshots/
-```
+### Login Page
+![Login Page](screenshots/login.png)
+
+### Signup Page
+![Signup Page](screenshots/signup.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Addition of Transactions
+![Addition of Transactions](screenshots/adding-transactions.png)
+
+### Statistics
+![Statistics](screenshots/stats.png)
+
+### Settings
+![Settings](screenshots/settings.png)
 
 ---
 
